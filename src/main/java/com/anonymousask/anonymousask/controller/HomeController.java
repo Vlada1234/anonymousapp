@@ -1,0 +1,29 @@
+package com.anonymousask.anonymousask.controller;
+
+import com.anonymousask.anonymousask.model.Post;
+import com.anonymousask.anonymousask.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Collection;
+
+@Controller
+public class HomeController {
+
+    private final PostService postService;
+
+    @Autowired
+    public HomeController(PostService postService) {
+        this.postService = postService;
+    }
+
+    @GetMapping("/")
+    public String displayAllPosts(Model model) {
+        Collection<Post> posts = this.postService.getAll();
+        model.addAttribute("post", posts);
+
+        return "home";
+    }
+}

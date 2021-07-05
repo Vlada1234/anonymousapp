@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div class="container">
+  <div class="post">
+    <h2 th:text="${post.title}">Title</h2>
+    <h5 th:text="'Published on ' + ${#dates.format(post.creationDate, 'yyyy MMMM dd')}">Creation date and by who</h5>
+    <div class="img">Image</div>
+  </div>
+  <div class="comments">
+    <h2>Comments</h2>
+    <div class="comment" th:each="comment : ${post.comments}">
+      <h5 th:text="'Commented on ' + ${#dates.format(post.creationDate, 'yyyy-MM-dd')}">Comment date and by whom</h5>
+      <p th:text="${comment.description}">Description</p>
+    </div>
+  </div>
+  <div class="align-center">
+    <a th:href="@{'/comment/{id}'(id=${post.id})}">
+      <button class="green-btn" type="button">Comment Post</button>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

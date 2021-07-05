@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="home.css" rel="stylesheet"/>
+
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="posts_wrapper">
+  <div class="post" th:each="post : ${post}">
+    <h2><a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}">Title</a></h2>
+    <h5 th:text="'Published on ' + ${#dates.format(post.creationDate, 'yyyy MMMM dd')}">Creation date</h5>
+    <p th:text="${post.description}">body text</p>
+    <br>
+  </div>
+</div>
+
+
+</body>
+</html>
